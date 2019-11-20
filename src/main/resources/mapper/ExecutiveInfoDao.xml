@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demoexcel.dao.ExecutiveInfoDao">
+
+    <resultMap type="com.example.demoexcel.entity.ExecutiveInfoEntity" id="executiveInfoMap">
+        <result property="id" column="id"/>
+        <result property="executiveName" column="executive_name"/>
+        <result property="enterpriseName" column="enterprise_name"/>
+        <result property="enterpriseCreditCode" column="enterprise_credit_code"/>
+        <result property="openStatus" column="open_status"/>
+        <result property="enterpriseAddress" column="enterprise_address"/>
+        <result property="executivePosition" column="executive_position"/>
+        <result property="deptId" column="dept_id"/>
+        <result property="retailCustomerManagerId" column="retail_customer_manager_id"/>
+        <result property="createDate" column="create_date"/>
+        <result property="creator" column="creator"/>
+        <result property="updateDate" column="update_date"/>
+        <result property="registerCapital" column="register_capital"/>
+        <result property="legalRepresentative" column="legal_representative"/>
+        <result property="telephone" column="telephone"/>
+        <result property="email" column="email"/>
+        <result property="companyType" column="company_type"/>
+        <result property="industry" column="industry"/>
+        <result property="cardNumber" column="card_number"/>
+        <result property="idCard" column="id_card"/>
+        <result property="customerOpeningDay" column="customer_opening_day"/>
+        <result property="telephoneNumber" column="telephone_number"/>
+        <result property="establishmentTime" column="establishment_time"/>
+        <result property="highestCardholderLevel" column="highest_cardholder_level"/>
+        <result property="flagMicroLoanBusiness" column="flag_micro_loan_business"/>
+        <result property="executiveId" column="executive_id"/>
+    </resultMap>
+
+
+    <insert id="insertOrUpdate">
+        insert into executive_info(executive_name,enterprise_name,enterprise_credit_code,
+        enterprise_address,executive_position,dept_id,retail_customer_manager_id,creator,create_date,
+        register_capital,legal_representative,telephone,email,company_type,industry,
+        card_number,id_card,customer_opening_day,telephone_number,establishment_time,highest_cardholder_level,flag_micro_loan_business,executive_id)
+        values
+        <foreach collection="list" item="info" separator=",">
+            (
+            #{info.executiveName},#{info.enterpriseName},#{info.enterpriseCreditCode},
+            #{info.enterpriseAddress},#{info.executivePosition},#{info.deptId},#{info.retailCustomerManagerId},#{info.creator},#{info.createDate},
+            #{info.registerCapital},#{info.legalRepresentative},#{info.telephone},#{info.email},#{info.companyType},#{info.industry},
+            #{info.cardNumber},#{info.idCard},#{info.customerOpeningDay},#{info.telephoneNumber},#{info.establishmentTime},#{info.highestCardholderLevel},#{info.flagMicroLoanBusiness},
+            #{info.executiveId})
+        </foreach>
+        ON DUPLICATE KEY UPDATE
+        executive_name = VALUES(executive_name),
+        enterprise_name = VALUES(enterprise_name),
+        enterprise_credit_code = VALUES(enterprise_credit_code),
+        retail_customer_manager_id = VALUES(retail_customer_manager_id),
+        enterprise_address = VALUES(enterprise_address),
+        executive_position = VALUES(executive_position),
+        dept_id = VALUES(dept_id),
+        creator = VALUES(creator),
+        register_capital = VALUES(register_capital),
+        legal_representative = VALUES(legal_representative),
+        telephone = VALUES(telephone),
+        email = VALUES(email),
+        company_type = VALUES(company_type),
+        industry = VALUES(industry),
+        card_number = VALUES(card_number),
+        id_card = VALUES(id_card),
+        customer_opening_day = VALUES(customer_opening_day),
+        telephone_number = VALUES(telephone_number),
+        establishment_time = VALUES(establishment_time),
+        highest_cardholder_level = VALUES(highest_cardholder_level),
+        flag_micro_loan_business = VALUES(flag_micro_loan_business),
+        executive_id =  VALUES(executive_id)
+    </insert>
+
+</mapper>
